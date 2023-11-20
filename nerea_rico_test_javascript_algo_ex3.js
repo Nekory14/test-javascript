@@ -51,7 +51,7 @@ function F32(to_check) {
 }
 
 // F33: Check each region
-function F33(to_check) {
+function F33(to_check, original) {
     var errorTable = document.createElement('table');
     errorTable.border = "1";
 
@@ -66,7 +66,7 @@ function F33(to_check) {
             if (!F21(region)) {
                 var row = errorTable.insertRow();
                 var cell1 = row.insertCell(0);
-                cell1.innerHTML = "Region " + ((i / 3) * 3 + (j / 3 + 1)) + " incorrect";  // Corregir la numeración de las regiones
+                cell1.innerHTML = "Region " + ((i / 3) * 3 + (j / 3 + 1)) + " incorrect";
 
                 for (var k = 0; k < region.length; k++) {
                     var cell = row.insertCell(k + 1);
@@ -82,24 +82,13 @@ function F33(to_check) {
     document.getElementById('error-container').appendChild(errorTable);
 }
 
-
-
 document.addEventListener("DOMContentLoaded", function () {
-    var to_check = [
-        [4, 9, 5, 2, 7, 3, 6, 8, 1],
-        [6, 1, 3, 9, 4, 4, 7, 5, 2],
-        [8, 2, 7, 5, 6, 1, 4, 3, 9],
-        [7, 6, 1, 8, 2, 4, 5, 9, 3],
-        [9, 5, 8, 1, 3, 7, 2, 1, 4],
-        [2, 3, 4, 1, 5, 9, 8, 6, 7],
-        [1, 7, 9, 4, 8, 5, 3, 2, 6],
-        [3, 8, 2, 7, 9, 6, 1, 4, 5],
-        [2, 4, 6, 3, 1, 2, 9, 7, 8]
-    ];
+    var to_check = F11(to_verify);
+
+    var table_to_display = F12(to_check);
+    document.getElementById('table-container').innerHTML = table_to_display;
 
     F31(to_check);
     F32(to_check);
-    F33(to_check);
-
+    F33(to_check, F11(array_number));
 });
-
